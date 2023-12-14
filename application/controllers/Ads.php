@@ -10,8 +10,8 @@ class Ads extends CI_Controller {
         $this->load->model('Makun');
      }
 
-	 function index()
-	 {
+	function index()
+	{
 		$this->form_validation->set_rules('username_admin', 'Username_Admin', 'required|trim');
         $this->form_validation->set_rules('email_admin', 'Email_Admin', 'required|trim|valid_email');
         $this->form_validation->set_rules('password_admin', 'Password_Admin', 'required|trim');

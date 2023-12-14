@@ -1,8 +1,9 @@
 <?php
 
 class Madmin extends CI_Model{
-    public function cek_login($u, $p, $role){
-        $q = $this->db->get_where('admin', array('username_admin' => $u, 'password_admin' => $p, 'id_super' => $role));
+    public function cek_login($u, $p, $role, $s){
+        $q = $this->db->get_where('admin', array('username_admin' => $u, 'password_admin' => $p, 'id_super' => $role, 'status' => $s));
+
         return $q;
     }
 
@@ -16,7 +17,8 @@ class Madmin extends CI_Model{
           
             return 0;
         }
-    }
+    } 
+
 }
 
 

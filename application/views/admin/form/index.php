@@ -50,7 +50,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2>John Doe</h2>
+							<h2>Admin</h2>
 						</div>
 					</div>
 					<!-- /menu profile quick info -->
@@ -239,15 +239,14 @@
 								</div>
 								<div class="x_content">
 									<br />
-
-
-									<form action="TambahData" method="post" enctype="multipart/form-data">
+									<?php if ($show == NULL) { ?>
+										<form action="TambahData" method="post" enctype="multipart/form-data">
 										<?php echo $this->session->userdata('username_admin');?>
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_cafe">Nama Cafe <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="nama_cafe" id="nama_cafe" required="required" class="form-control ">
+												<input type="text" name="nama_cafe" id="nama_cafe" required="required" class="form-control"">
 											</div>
 										</div>
 										<div class="item form-group">
@@ -285,6 +284,46 @@
 										</div>
 
 									</form>
+									<?php } else { ?>
+										<form action="<?php echo base_url('Edit_cafe/UpdateCafe/')?>" method="post" enctype="multipart/form-data">
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_cafe">Nama Cafe <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" name="nama_cafe" id="nama_cafe" required="required" class="form-control" placeholder="<?php echo $show['nama_cafe']; ?>">
+											</div>
+										</div>
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="alamat_cafe">Alamat Cafe <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="alamat_cafe" name="alamat_cafe" required="required" class="form-control" placeholder="<?php echo $show['alamat_cafe']; ?>">
+											</div>
+										</div>
+										<div class="item form-group">
+											<label for="telp_cafe" class="col-form-label col-md-3 col-sm-3 label-align">No Telp Cafe</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="telp_cafe" class="form-control" type="text" name="telp_cafe" placeholder="<?php echo $show['telp_cafe']; ?>">
+											</div>
+										</div>
+										<div class="item form-group">
+											<label for="deskripsi_cafe" class="col-form-label col-md-3 col-sm-3 label-align">Deskripsi Cafe</label>
+											<div class="col-md-6 col-sm-6 ">
+												<textarea name="deskripsi_cafe" id="deskripsi_cafe" cols="30" rows="10"></textarea>
+											</div>
+										</div>
+										<div class="ln_solid"></div>
+										<div class="item form-group">
+											<div class="col-md-6 col-sm-6 offset-md-3">
+												<button class="btn btn-primary" type="button">Cancel</button>
+												<button class="btn btn-primary" type="reset">Reset</button>
+												<button type="submit" class="btn btn-success">Edit Data</button>
+											</div>
+										</div>
+
+									</form>
+									<?php } ?>
+								
 								</div>
 
 								<div class="x_content">
@@ -305,18 +344,22 @@
                 </thead>
 				<tbody>
 
-				
-         <tr>
-            <td><?php echo $show['nama_cafe']; ?></td>
-            <td><?php echo $show['alamat_cafe']; ?></td>
-            <td><?php echo $show['telp_cafe']; ?></td>
-            <td><?php echo $show['deskripsi_cafe']; ?></td>
-            <td><img src="<?php echo base_url() . '/uploads/cafe/' . $show['nama_cafe'] . '/' . $show['gambar_cafe']?>" alt="fotoCafe" width="100"></td>
-            <td>
-               <a href="Data?edit=<?php echo $show['id_cafe']; ?>"><i class="fa fa-edit"></i></a>
-               <a href="#"><i class="fa fa-trash"></i></a>
-            </td>
-         </tr> 
+				<?php if($show == NULL) {?>
+					<h6 class="text-bold">Silahkan Tambah Data</h1>
+				<?php } else { ?>
+					<tr>
+						<td><?php echo $show['nama_cafe']; ?></td>
+						<td><?php echo $show['alamat_cafe']; ?></td>
+						<td><?php echo $show['telp_cafe']; ?></td>
+						<td><?php echo $show['deskripsi_cafe']; ?></td>
+						<td><img src="<?php echo base_url() . '/uploads/cafe/' . $show['nama_cafe'] . '/' . $show['gambar_cafe']?>" alt="fotoCafe" width="100"></td>
+						<td>
+						<a href="Data?edit=<?php echo $show['id_cafe']; ?>"><i class="fa fa-edit"></i></a>
+						<a href="<?php echo base_url('Edit_cafe/delete/' . $this->session->userdata('id_cafe')); ?>"><i class="fa fa-trash"></i></a>
+
+						</td>
+					</tr> 
+				<?php } ?>
 		
 </tbody>
 

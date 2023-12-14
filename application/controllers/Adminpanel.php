@@ -19,35 +19,42 @@ class Adminpanel extends CI_Controller {
         $this->load->model('Madmin');
         $u = $this->input->post('username_admin');
         $p = $this->input->post('password_admin');
-    
-        // Get the role from the database or any other source
+        $s = 'Y';
+
         $role = $this->Madmin->get_role($u, $p);
     
-        $cek = $this->Madmin->cek_login($u, $p, $role)->num_rows();
+        $cek = $this->Madmin->cek_login($u, $p, $role, $s)->num_rows();
     
-        if($cek){
+    
+        if ($cek) {
             $data_session = array(
                 'username_admin' => $u,
-                'status' => 'login',
                 'id_super' => $role,
+                'status' => $s,
             );
             if ($role == 2) {
+                if($s == "Y"){
+                    $this->session->set_userdata($data_session);
+                    redirect('adminpanel/dashboard');
+                }
+                else {
+                    redirect('adminpanel');
+                }
+            }
+            else {
                 $this->session->set_userdata($data_session);
-                redirect('adminpanel/dashboard');
-            } else {
-                $this->session->set_userdata($data_session);
-                redirect('Main');
+                redirect('super/dashboard');
             }
         } else {
             redirect('adminpanel');
         }
     }
 
-    public function logout(){
-        $this->session->sess_destroy();
-		redirect('Main');
-    }    
-  
+public function logout(){
+    $this->session->sess_destroy();
+    redirect('Main');
+}  
+
 }
 
 ?>

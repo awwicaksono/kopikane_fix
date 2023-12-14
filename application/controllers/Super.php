@@ -9,7 +9,7 @@ class Super extends CI_Controller {
     }
 
     public function dashboard(){
-        if(empty($this->session->userdata('username_super'))){
+        if(empty($this->session->userdata('username_admin'))){
             redirect('super');
         }
         $this->load->view('super/layout/dashboard');
@@ -17,14 +17,14 @@ class Super extends CI_Controller {
 
     public function login(){
         $this->load->model('Msuper');
-        $u = $this->input->post('username_super');
-        $p = $this->input->post('password_super');
+        $u = $this->input->post('username_admin');
+        $p = $this->input->post('password_admin');
 
         $cek = $this->Msuper->cek_login($u, $p)->num_rows();
 
         if($cek==1){
             $data_session = array(
-                'username_super' => $u,
+                'username_admin' => $u,
                 'status' => 'login'
             );
             $this->session->set_userdata($data_session);

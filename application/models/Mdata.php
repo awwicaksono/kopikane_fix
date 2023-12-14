@@ -3,7 +3,8 @@
 class Mdata extends CI_Model{
 
     function ambil_data(){
-       return $this->db->get('tbl_cafe');
+        $this->db->select('*');
+        return $this->db->get('tbl_cafe')->result_array();
     }
 
 }

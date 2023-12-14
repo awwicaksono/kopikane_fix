@@ -20,11 +20,7 @@
 	<section class="event-feature sec-padding pb_60" data-bg-color="#fafafa">
 		<div class="container">
 			<div class="row">
-				<?php 
-
-			
-				
-				foreach($tbl_cafe as $cafe) { ?>
+				<?php foreach($tbl_cafe as $cafe) { ?>
 
 				<div class="col-sm-6 col-md-4">
 	              	<div class="event border-1px mb_30">
@@ -32,18 +28,18 @@
 	                  		<div class="col-sm-12">
 	                    		<div class="event-thumb">
 	                      			<div class="thumb">
-	                       				 <img width="100" src="<?php echo $cafe->gambar_cafe; ?>" alt="fotoCafe">
+	                       				 <img full-width="100" src="<?php echo base_url() . '/uploads/cafe/' . $cafe['nama_cafe'] . '/' . $cafe['gambar_cafe']?>" alt="fotoCafe">
 	                      			</div>
 	                   
 	                    		</div>
 	                  		</div>
 									<div class="col-sm-12">
 										<div class="event-content p_20">
-										<h4 class="event-title"><a href="#"><?php echo $cafe->nama_cafe; ?></a></h4>
+										<h4 class="event-title"><a href="#"><?php echo $cafe['nama_cafe']; ?></a></h4>
 										<ul class="event-held list-inline">
-											<li data-text-color="#555"> <i class="fa fa-map-marker"></i> <?php echo $cafe->alamat_cafe; ?></li>
+											<li data-text-color="#555"> <i class="fa fa-map-marker"></i> <?php echo $cafe['alamat_cafe']; ?></li>
 										</ul>
-										<p class="mb-0"><?php echo $cafe->deskripsi_cafe; ?></p>
+										<p class="mb-0"><?php echo $cafe['deskripsi_cafe']; ?></p>
 										<!--  <a class="text-thm" href="#"> Read More </a> -->
 										</div>
 									</div>

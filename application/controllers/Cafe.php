@@ -25,7 +25,7 @@ class Cafe extends CI_Controller {
 	 */
 	public function index()
 	{
-        $data['tbl_cafe'] = $this->Mdata->ambil_data()->result();
+        $data['tbl_cafe'] = $this->Mdata->ambil_data();
 		$this->load->view('home/cafe/header');
 		$this->load->view('home/cafe/index', $data);
 		$this->load->view('home/cafe/footer');
